@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Keyboard,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -7,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {TaskCard} from './components/taskCard/TaskCard';
 
 function App(): JSX.Element {
   const [tasks, setTasks] = useState(['']);
@@ -15,6 +17,7 @@ function App(): JSX.Element {
   function handleSubmit() {
     setTasks([taskInp, ...tasks]);
     setTaskInp('');
+    Keyboard.dismiss();
   }
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -31,10 +34,11 @@ function App(): JSX.Element {
       </View>
       <View style={styles.list}>
         {tasks.map((item, i) => (
-          <Text key={i} style={{color: 'white'}}>
+          <Text key={i} style={{color: 'black'}}>
             {item}
           </Text>
         ))}
+        <TaskCard />
       </View>
     </SafeAreaView>
   );
@@ -43,6 +47,7 @@ function App(): JSX.Element {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
+    padding: 10,
   },
   header: {
     alignItems: 'center',
