@@ -2,11 +2,15 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import styles from './style';
 
-export function TaskCard(): JSX.Element {
+interface TaskCardProps {
+  task: string;
+}
+
+export function TaskCard({task}: TaskCardProps): JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.textSection}>
-        <Text style={styles.text}>feaf</Text>
+        <Text style={styles.text}>{task}</Text>
       </View>
       <View style={styles.buttonSection}>
         <TouchableOpacity style={styles.button}>

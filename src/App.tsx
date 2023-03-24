@@ -11,7 +11,7 @@ import {
 import {TaskCard} from './components/taskCard/TaskCard';
 
 function App(): JSX.Element {
-  const [tasks, setTasks] = useState(['']);
+  const [tasks, setTasks] = useState<string[]>([]);
   const [taskInp, setTaskInp] = useState('');
 
   function handleSubmit() {
@@ -26,6 +26,7 @@ function App(): JSX.Element {
         <TextInput
           value={taskInp}
           onChangeText={newText => setTaskInp(newText)}
+          onSubmitEditing={handleSubmit}
           style={styles.input}
         />
         <TouchableOpacity onPress={handleSubmit} style={styles.createBtn}>
@@ -34,11 +35,8 @@ function App(): JSX.Element {
       </View>
       <View style={styles.list}>
         {tasks.map((item, i) => (
-          <Text key={i} style={{color: 'black'}}>
-            {item}
-          </Text>
+          <TaskCard key={i} task={item} />
         ))}
-        <TaskCard />
       </View>
     </SafeAreaView>
   );
@@ -47,6 +45,7 @@ function App(): JSX.Element {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
+    rowGap: 5,
     padding: 10,
   },
   header: {
